@@ -1,0 +1,7 @@
+.page-section{
+  padding: 4.5rem 0;
+  &__blue{
+    background: $mainblue;
+    color:#fff;
+  }
+}
