@@ -11,12 +11,12 @@ rename = require('gulp-rename');
 gulp.task('styles',function(){
   return gulp.src('./app/assets/styles/style.pcss')
     .pipe(postcss([cssimport, mixins, cssvars, nested, autoprefixer]))
-    .pipe(rename({
-      extname: '.css'
-    }))
     .on('error',function(errorInfo){
       console.log(errorInfo.toString());
       this.emit('end');
     })
+    .pipe(rename({
+      extname: '.css'
+    }))
     .pipe(gulp.dest('./app/temp/styles/'))
 });
