@@ -5,12 +5,15 @@ cssvars = require('postcss-simple-vars'),
 nested = require('postcss-nested'),
 cssimport = require('postcss-import'),
 mixins = require('postcss-mixins'),
-rename = require('gulp-rename');
+rename = require('gulp-rename'),
+hexrgba = require('postcss-hexrgba'),
+map = require('gulp-sourcemaps');
 
 
 gulp.task('styles',function(){
   return gulp.src('./app/assets/styles/style.pcss')
-    .pipe(postcss([cssimport, mixins, cssvars, nested, autoprefixer]))
+    .pipe(map.init())
+    .pipe(postcss([cssimport, mixins, cssvars, nested, hexrgba, autoprefixer]))
     .on('error',function(errorInfo){
       console.log(errorInfo.toString());
       this.emit('end');
@@ -18,5 +21,6 @@ gulp.task('styles',function(){
     .pipe(rename({
       extname: '.css'
     }))
+    .pipe(map.write('/'))
     .pipe(gulp.dest('./app/temp/styles/'))
 });
