@@ -20,10 +20,18 @@ gulp.task('watch',function(){
     gulp.start('cssInject');
   });
 
+  watch('./app/assets/scripts/**/*.js', function(){
+    gulp.start('scriptsRefresh');
+  });
+
 });
 
 
 gulp.task('cssInject',['styles'],function(){
   return gulp.src('./app/temp/styles/style.css')
     .pipe(browsersync.stream());
+});
+
+gulp.task('scriptsRefresh', ['scripts'], function(){
+  browsersync.reload();
 });
